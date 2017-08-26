@@ -2,4 +2,7 @@
 
 export(GetCCData)
 export(GetMOTData)
+export(GetMWDData)
+export(GetPTDData)
+export(GetRSWData)
 export(GetTorData)
