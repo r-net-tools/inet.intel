@@ -4,8 +4,7 @@
 #'
 #' @return character, local path of downloaded file
 DownloadCCData <- function(dstpath = tempdir()){
-  local.file <- paste(tempdir(),
-                    "cctracker.txt",
+  local.file <- paste(dstpath, "cctracker.txt",
                     sep = ifelse(.Platform$OS.type == "windows", "\\", "/"))
   source.raw.data <- "http://osint.bambenekconsulting.com/feeds/c2-ipmasterlist.txt"
   download.file(url = source.raw.data, destfile = local.file)

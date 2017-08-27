@@ -8,8 +8,7 @@
 #'
 #' @return character, local path of downloaded file
 DownloadMOTData <- function(dstpath = tempdir()){
-  local.file <- paste(tempdir(),
-                      "mailonetime.txt",
+  local.file <- paste(dstpath, "mailonetime.txt",
                       sep = ifelse(.Platform$OS.type == "windows", "\\", "/"))
   source.raw.data <- "https://raw.githubusercontent.com/martenson/disposable-email-domains/master/disposable_email_blacklist.conf"
   download.file(url = source.raw.data, destfile = local.file)

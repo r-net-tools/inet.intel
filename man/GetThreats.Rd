@@ -2,9 +2,9 @@
 % Please edit documentation in R/inet.intel.R
 \name{GetThreats}
 \alias{GetThreats}
-\title{inet.intel}
+\title{Get threats data.frame}
 \usage{
-GetThreats()
+GetThreats(dstpath = tempdir())
 }
 \value{
 data.frame

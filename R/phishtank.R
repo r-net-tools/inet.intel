@@ -8,8 +8,7 @@
 #'
 #' @return character, local path of downloaded file
 DownloadPTDData <- function(dstpath = tempdir()){
-  local.file <- paste(tempdir(),
-                      "phishtank.txt",
+  local.file <- paste(dstpath, "phishtank.txt",
                       sep = ifelse(.Platform$OS.type == "windows", "\\", "/"))
   source.raw.data <- "http://data.phishtank.com/data/online-valid.csv"
   download.file(url = source.raw.data, destfile = local.file)

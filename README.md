@@ -1,6 +1,6 @@
 # inet.intel
 
-The goal of inet.intel is to ...
+The goal of inet.intel is to get updated internet threats as list of IOCs based on IP adresses, domains and URLs.
 
 ## Installation
 
@@ -18,4 +18,5 @@ This is a basic example which shows you how to solve a common problem:
 
 ``` r
 ## basic example code
+df.threats <- inet.intel::GetThreats(dstpath = ".\\data")
 ```

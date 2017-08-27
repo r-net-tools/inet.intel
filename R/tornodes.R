@@ -8,8 +8,7 @@
 #'
 #' @return character, local path of downloaded file
 DownloadTorData <- function(dstpath = tempdir()){
-  local.file <- paste(tempdir(),
-                      "tornodes.txt",
+  local.file <- paste(dstpath, "tornodes.txt",
                       sep = ifelse(.Platform$OS.type == "windows", "\\", "/"))
   source.raw.data <- "https://www.dan.me.uk/tornodes"
   download.file(url = source.raw.data, destfile = local.file)

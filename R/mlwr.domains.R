@@ -8,8 +8,7 @@
 #'
 #' @return character, local path of downloaded file
 DownloadMWDData <- function(dstpath = tempdir()){
-  local.file <- paste(tempdir(),
-                      "malware.domains.txt",
+  local.file <- paste(dstpath, "malware.domains.txt",
                       sep = ifelse(.Platform$OS.type == "windows", "\\", "/"))
   source.raw.data <- "http://mirror1.malwaredomains.com/files/justdomains"
   download.file(url = source.raw.data, destfile = local.file)

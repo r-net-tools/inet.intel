@@ -11,8 +11,7 @@
 #'
 #' @return character, local path of downloaded file
 DownloadRWDData <- function(dstpath = tempdir()){
-  local.file <- paste(tempdir(),
-                      "ransom.tracker.domains.txt",
+  local.file <- paste(dstpath, "ransom.tracker.domains.txt",
                       sep = ifelse(.Platform$OS.type == "windows", "\\", "/"))
   source.raw.data <- "https://ransomwaretracker.abuse.ch/downloads/RW_DOMBL.txt"
   download.file(url = source.raw.data, destfile = local.file)
