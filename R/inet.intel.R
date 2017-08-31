@@ -84,7 +84,7 @@ GetThreats <- function(dstpath = tempdir()){
   save(df.threats, file = dstfile)
   dstfile <- paste(dstpath, "threats.csv",
                    sep = ifelse(.Platform$OS.type == "windows", "\\", "/"))
-  write.csv(x = df.threats, file = dstfile)
+  write.csv(x = df.threats, file = dstfile, quote = FALSE, row.names = FALSE)
 
   return(df.threats)
 }
