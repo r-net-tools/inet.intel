@@ -67,18 +67,24 @@ GetThreats <- function(dstpath = tempdir()){
   df.ptd$source.info <- as.character(df.ptd$source.info)
 
   # Tidy df.rsw
+  print("Tidy data...")
   df.rsw$source <- as.factor(rep("ransomwaretracker.abuse.ch", nrow(df.rsw)))
   df.rsw$timestamp <- rep(dowload.time, nrow(df.rsw))
   names(df.rsw) <- c("ioc","type", "source", "timestamp")
   df.rsw$source.info <- as.character(rep(NA, nrow(df.rsw)))
 
   # Join data
+  print("Join data...")
   df.threats <- rbind(df.cc, df.mot, df.mwd, df.ptd, df.rsw)
 
   # Save data.frame
+  print("Save data...")
   dstfile <- paste(dstpath, "df.threats.rda",
                    sep = ifelse(.Platform$OS.type == "windows", "\\", "/"))
   save(df.threats, file = dstfile)
+  dstfile <- paste(dstpath, "threats.csv",
+                   sep = ifelse(.Platform$OS.type == "windows", "\\", "/"))
+  write.csv(x = df.threats, file = dstfile)
 
   return(df.threats)
 }
