@@ -32,9 +32,15 @@ BuildMWDDataFrame <- function(local.file = paste(tempdir(),
 #' Get Tornodes data.frame
 #'
 #' @return data.frame
-#' @export
-GetMWDData <- function(){
+GetMWDData <- function(dowload.time = Sys.time()){
   lf <- DownloadMWDData()
   df <- BuildMWDDataFrame(local.file = lf)
+  # Tidy df.mwd
+  df$type <- as.factor(rep("domain", nrow(df)))
+  df$source <- as.factor(rep("malwaredomains.com", nrow(df)))
+  df$timestamp <- rep(dowload.time, nrow(df))
+  names(df) <- c("ioc","type", "source", "timestamp")
+  df$source.info <- as.character(rep(NA, nrow(df)))
+
   return(df)
 }

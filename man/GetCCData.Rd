@@ -4,7 +4,7 @@
 \alias{GetCCData}
 \title{Get C&C data.frame}
 \usage{
-GetCCData()
+GetCCData(dowload.time = Sys.time())
 }
 \value{
 data.frame

@@ -32,9 +32,15 @@ BuildMOTDataFrame <- function(local.file = paste(tempdir(),
 #' Get Tornodes data.frame
 #'
 #' @return data.frame
-#' @export
-GetMOTData <- function(){
+GetMOTData <- function(dowload.time = Sys.time()){
   lf <- DownloadMOTData()
   df <- BuildMOTDataFrame(local.file = lf)
+  # Tidy df.mot
+  df$type <- as.factor(rep("domain", nrow(df)))
+  df$source <- as.factor(rep("martenson/disposable-email-domains", nrow(df)))
+  df$timestamp <- rep(dowload.time, nrow(df))
+  names(df) <- c("ioc","type", "source", "timestamp")
+  df$source.info <- as.character(rep(NA, nrow(df)))
+
   return(df)
 }

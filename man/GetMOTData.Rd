@@ -4,7 +4,7 @@
 \alias{GetMOTData}
 \title{Get Tornodes data.frame}
 \usage{
-GetMOTData()
+GetMOTData(dowload.time = Sys.time())
 }
 \value{
 data.frame

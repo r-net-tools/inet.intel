@@ -4,7 +4,7 @@
 \alias{GetRSWData}
 \title{Get ransom.tracker data.frame}
 \usage{
-GetRSWData()
+GetRSWData(dowload.time = Sys.time())
 }
 \value{
 data.frame

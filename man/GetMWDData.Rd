@@ -4,7 +4,7 @@
 \alias{GetMWDData}
 \title{Get Tornodes data.frame}
 \usage{
-GetMWDData()
+GetMWDData(dowload.time = Sys.time())
 }
 \value{
 data.frame

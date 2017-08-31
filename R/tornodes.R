@@ -36,7 +36,6 @@ BuildTorDataFrame <- function(local.file = paste(tempdir(),
 #' Get Tornodes data.frame
 #'
 #' @return data.frame
-#' @export
 GetTorData <- function(){
   lf <- DownloadTorData()
   df <- BuildTorDataFrame(local.file = lf)

@@ -32,9 +32,30 @@ BuildPTDDataFrame <- function(local.file = paste(tempdir(),
 #' Get Tornodes data.frame
 #'
 #' @return data.frame
-#' @export
-GetPTDData <- function(){
+GetPTDData <- function(dowload.time = Sys.time()){
   lf <- DownloadPTDData()
   df <- BuildPTDDataFrame(local.file = lf)
+  # Tidy df.ptd
+  raw.descr.ptd <- apply(df, 1,
+                         function(x) as.character(jsonlite::toJSON(
+                           list(phish_id = x[1],
+                                phish_detail_url = x[3],
+                                submission_time = x[4],
+                                verified = x[5],
+                                verification_time = x[6],
+                                online = x[7],
+                                target = x[8]))))
+  raw.descr.ptd <- as.data.frame(raw.descr.ptd)
+  names(raw.descr.ptd) <- c("raw.descr")
+  df <- cbind(df, raw.descr.ptd)
+
+  df <- df[,c("url", "raw.descr")]
+  df$type <- as.factor(rep("url", nrow(df)))
+  df$source <- as.factor(rep("phishtank.com", nrow(df)))
+  df$timestamp <- rep(dowload.time, nrow(df))
+  names(df) <- c("ioc","source.info","type", "source", "timestamp")
+  df <- df[,c("ioc","type","source", "timestamp", "source.info")]
+  df$ioc <- as.character(df$ioc)
+  df$source.info <- as.character(df$source.info)
   return(df)
 }

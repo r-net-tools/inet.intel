@@ -4,7 +4,7 @@
 \alias{GetPTDData}
 \title{Get Tornodes data.frame}
 \usage{
-GetPTDData()
+GetPTDData(dowload.time = Sys.time())
 }
 \value{
 data.frame

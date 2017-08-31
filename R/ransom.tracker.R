@@ -94,8 +94,7 @@ BuildRWIDataFrame <- function(local.file = paste(tempdir(),
 #' Get ransom.tracker data.frame
 #'
 #' @return data.frame
-#' @export
-GetRSWData <- function(){
+GetRSWData <- function(dowload.time = Sys.time()){
   lf <- DownloadRWDData()
   df.d <- BuildRWDDataFrame(local.file = lf)
   lf <- DownloadRWUData()
@@ -105,6 +104,12 @@ GetRSWData <- function(){
 
   df <- dplyr::bind_rows(df.d, df.u, df.i)
   df$type <- as.factor(df$type)
+
+  # Tidy df.rsw
+  df$source <- as.factor(rep("ransomwaretracker.abuse.ch", nrow(df)))
+  df$timestamp <- rep(dowload.time, nrow(df))
+  names(df) <- c("ioc","type", "source", "timestamp")
+  df$source.info <- as.character(rep(NA, nrow(df)))
 
   return(df)
 }

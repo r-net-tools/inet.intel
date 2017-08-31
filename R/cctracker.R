@@ -29,9 +29,26 @@ BuildCCDataFrame <- function(local.file = paste(tempdir(),
 #' Get C&C data.frame
 #'
 #' @return data.frame
-#' @export
-GetCCData <- function(){
+GetCCData <- function(dowload.time = Sys.time()){
   lf <- DownloadCCData()
   df <- BuildCCDataFrame(local.file = lf)
+  # Tidy
+  raw.descr.cc <- apply(df, 1,
+                        function(x) as.character(jsonlite::toJSON(
+                          list(descr = x[2],
+                               timestamp = x[3],
+                               ref = x[4]))))
+  raw.descr.cc <- as.data.frame(raw.descr.cc)
+  names(raw.descr.cc) <- c("raw.descr")
+  df <- cbind(df, raw.descr.cc)
+  df <- df[,c("ip", "raw.descr")]
+  df$type <- as.factor(rep("ip", nrow(df)))
+  df$source <- as.factor(rep("osint.bambenekconsulting.com", nrow(df)))
+  df$timestamp <- rep(dowload.time, nrow(df))
+  names(df) <- c("ioc","source.info","type", "source", "timestamp")
+  df <- df[,c("ioc","type","source", "timestamp", "source.info")]
+  df$ioc <- as.character(df$ioc)
+  df$source.info <- as.character(df$source.info)
+
   return(df)
 }
