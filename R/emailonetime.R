@@ -29,7 +29,7 @@ BuildMOTDataFrame <- function(local.file = paste(tempdir(),
   return(df)
 }
 
-#' Get Tornodes data.frame
+#' Get OneTimeEmail domains data.frame
 #'
 #' @return data.frame
 GetMOTData <- function(dowload.time = Sys.time()){
