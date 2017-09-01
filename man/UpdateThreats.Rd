@@ -6,9 +6,6 @@
 \usage{
 UpdateThreats(dstpath = tempdir(), source.db = "all")
 }
-\value{
-data.frame
-}
 \description{
 Get threats data.frame
 }

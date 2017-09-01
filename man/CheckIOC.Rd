@@ -2,7 +2,7 @@
 % Please edit documentation in R/inet.intel.R
 \name{CheckIOC}
 \alias{CheckIOC}
-\title{Title}
+\title{Check if IOC is in data.frame. It returns info as json.}
 \usage{
 CheckIOC(ioc = "github.com")
 }
@@ -13,5 +13,5 @@ CheckIOC(ioc = "github.com")
 json
 }
 \description{
-Title
+Check if IOC is in data.frame. It returns info as json.
 }

@@ -2,7 +2,7 @@
 % Please edit documentation in R/emailonetime.R
 \name{GetMOTData}
 \alias{GetMOTData}
-\title{Get Tornodes data.frame}
+\title{Get OneTimeEmail domains data.frame}
 \usage{
 GetMOTData(dowload.time = Sys.time())
 }
@@ -10,5 +10,5 @@ GetMOTData(dowload.time = Sys.time())
 data.frame
 }
 \description{
-Get Tornodes data.frame
+Get OneTimeEmail domains data.frame
 }

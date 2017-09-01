@@ -3,3 +3,4 @@
 export(CheckIOC)
 export(NewIOC)
 export(UpdateThreats)
+export(ValidSources)

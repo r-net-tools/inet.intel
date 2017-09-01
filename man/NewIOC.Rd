@@ -2,7 +2,7 @@
 % Please edit documentation in R/inet.intel.R
 \name{NewIOC}
 \alias{NewIOC}
-\title{Title}
+\title{Returns empty IOC data.frame}
 \usage{
 NewIOC()
 }
@@ -10,5 +10,5 @@ NewIOC()
 data.frame
 }
 \description{
-Title
+Returns empty IOC data.frame
 }
