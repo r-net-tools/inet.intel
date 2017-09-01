@@ -1,8 +1,17 @@
+#' Return valid source options
+#'
+#' @return character
+#' @export
+ValidSources <- function() {
+  valid <- c("all", "cc", "mot", "mwd", "ptd", "rsw", "fho")
+  return(valid)
+}
+
 #' Get threats data.frame
 #'
 #' @export
 UpdateThreats <- function(dstpath = tempdir(), source.db = "all"){
-  valid <- c("all", "cc", "mot", "mwd", "ptd", "rsw")
+  valid <- ValidSources()
   source.db <- valid[valid %in% source.db]
 
   if (any(c("all","cc") %in% source.db)) {
@@ -34,11 +43,18 @@ UpdateThreats <- function(dstpath = tempdir(), source.db = "all"){
   } else {
     df.rsw <- NewIOC()
   }
+
+  if (any(c("all","fho") %in% source.db)) {
+    df.fho <- GetFHOData()
+  } else {
+    df.fho <- NewIOC()
+  }
+
   #df.tor <- inet.intel::GetTorData()
 
   # Join data
   print("Join data...")
-  df.threats <- rbind(df.cc, df.mot, df.mwd, df.ptd, df.rsw)
+  df.threats <- rbind(df.cc, df.mot, df.mwd, df.ptd, df.rsw, df.fho)
 
   # Save data.frame
   print("Save data...")
@@ -52,7 +68,7 @@ UpdateThreats <- function(dstpath = tempdir(), source.db = "all"){
   print(dstfile)
 }
 
-#' Title
+#' Returns empty IOC data.frame
 #'
 #' @return data.frame
 #' @export
@@ -67,7 +83,7 @@ NewIOC <- function(){
   return(df)
 }
 
-#' Title
+#' Check if IOC is in data.frame. It returns info as json.
 #'
 #' @param ioc
 #'
