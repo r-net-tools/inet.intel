@@ -29,7 +29,7 @@ BuildPTDDataFrame <- function(local.file = paste(tempdir(),
   return(df)
 }
 
-#' Get Tornodes data.frame
+#' Get phistank data.frame
 #'
 #' @return data.frame
 GetPTDData <- function(dowload.time = Sys.time()){
@@ -47,9 +47,11 @@ GetPTDData <- function(dowload.time = Sys.time()){
                                 target = x[8]))))
   raw.descr.ptd <- as.data.frame(raw.descr.ptd)
   names(raw.descr.ptd) <- c("raw.descr")
-  df <- cbind(df, raw.descr.ptd)
+  df <- cbind(df[,c("url")], raw.descr.ptd)
 
-  df <- df[,c("url", "raw.descr")]
+  # TODO: add df$url inside json as ioc variable
+  df$url <- urltools::url_parse(df$url)$domain
+
   df$type <- as.factor(rep("url", nrow(df)))
   df$source <- as.factor(rep("phishtank.com", nrow(df)))
   df$timestamp <- rep(dowload.time, nrow(df))

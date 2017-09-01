@@ -29,6 +29,7 @@ BuildRWDDataFrame <- function(local.file = paste(tempdir(),
   df <- read.csv(file = local.file, header = F, comment.char = "#",
                  col.names = c("ransom.ioc"), colClasses = c("character"))
   df$type <- rep("domain",nrow(df))
+  df$source.info <- as.character(rep(NA, nrow(df)))
 
   return(df)
 }
@@ -58,6 +59,9 @@ BuildRWUDataFrame <- function(local.file = paste(tempdir(),
   df <- read.csv(file = local.file, header = F, comment.char = "#",
                  col.names = c("ransom.ioc"), colClasses = c("character"))
   df$type <- rep("url",nrow(df))
+  # TODO: source.info stored as JSON
+  df$source.info <- as.character(df$ransom.ioc)
+  df$ransom.ioc <- urltools::url_parse(df$ransom.ioc)$domain
 
   return(df)
 }
@@ -87,6 +91,7 @@ BuildRWIDataFrame <- function(local.file = paste(tempdir(),
   df <- read.csv(file = local.file, header = F, comment.char = "#",
                  col.names = c("ransom.ioc"), colClasses = c("character"))
   df$type <- rep("ip",nrow(df))
+  df$source.info <- as.character(rep(NA, nrow(df)))
 
   return(df)
 }
@@ -108,8 +113,8 @@ GetRSWData <- function(dowload.time = Sys.time()){
   # Tidy df.rsw
   df$source <- as.factor(rep("ransomwaretracker.abuse.ch", nrow(df)))
   df$timestamp <- rep(dowload.time, nrow(df))
-  names(df) <- c("ioc","type", "source", "timestamp")
-  df$source.info <- as.character(rep(NA, nrow(df)))
+  names(df) <- c("ioc","type", "source.info", "source", "timestamp")
+  df <- df[,c("ioc","type", "source", "timestamp", "source.info")]
 
   return(df)
 }

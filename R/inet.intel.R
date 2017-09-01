@@ -90,7 +90,8 @@ NewIOC <- function(){
 #' @return json
 #' @export
 CheckIOC <- function(ioc = "github.com") {
-  selected <- grepl(pattern = ioc, ignore.case = T, x = df.threats$ioc)
+  selected <- grepl(pattern = paste(".*", ioc, ".*", sep = ""),
+                    ignore.case = T, x = df.threats$ioc)
   if (any(selected)) {
     selected <- df.threats[selected,]
   } else {
